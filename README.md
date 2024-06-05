@@ -1,6 +1,6 @@
 # VeridiOculi Artefato IoT
 
-Criar um banco de dados a partir do query SQL fornecido em \SQL-Banco\veridi_BD.sql
+Criar um banco de dados a partir do query SQL fornecido em \requisitos\SQL-CriacaoBanco
 
 Apontar o conector <mysql-connector-java-5.1.6-bin>
 
