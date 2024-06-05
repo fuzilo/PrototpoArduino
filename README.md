@@ -15,3 +15,4 @@ Rodar a Aplicação Java
 pressionar o botão para executar a leitura e Gravar no banco
 
 Fim do arquivo
+![1000039202](https://github.com/fuzilo/PrototpoArduino/assets/19290063/ccba8dfa-43ee-4f14-b74f-7734669d7661)
