@@ -1,4 +1,5 @@
 # VeridiOculi Artefato IoT
+Alunos: Ricardo Matsumura, Valmir Cardoso, Luan Guilherme
 
 Criar um banco de dados a partir do query SQL fornecido em \requisitos\SQL-CriacaoBanco
 
