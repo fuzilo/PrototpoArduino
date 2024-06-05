@@ -1,0 +1,65 @@
+#include <dht.h>
+#include <LiquidCrystal.h> // Carrega a biblioteca LiquidCrystal
+
+// Define os pinos que serão utilizados para ligação ao display
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+dht DHT;
+
+#define DHT11_PINO A0
+#define BUTTON_PINO 8
+
+bool leituraRealizada = false;
+bool botaoPressionado = false;
+
+void setup() {
+    Serial.begin(9600);
+    pinMode(BUTTON_PINO, INPUT_PULLUP); // Definindo o pino do botão como entrada com resistor de pull-up interno
+    lcd.begin(16, 2); // Inicializa o LCD com 16 colunas e 2 linhas
+    inicializaLCD();
+}
+
+void loop() {
+    verificaBotaoELeitura();
+    delay(100); // Pequeno delay para evitar leituras múltiplas do botão em uma única pressão
+}
+
+void inicializaLCD() {
+    lcd.print("Veridi-Oculi");
+    lcd.setCursor(0, 1);
+    lcd.print("Inicializando");
+    delay(1000);
+    
+}
+
+void verificaBotaoELeitura() {
+    // Verifica se o botão foi pressionado
+    if (digitalRead(BUTTON_PINO) == LOW) {
+        if (!botaoPressionado) {
+            botaoPressionado = true;
+            if (!leituraRealizada) {
+                realizaLeituraDHT();
+                lcd.clear();
+                lcd.print("Temp = ");
+                lcd.print(DHT.temperature);
+                lcd.setCursor(0, 1);
+                lcd.print("Umidade = ");
+                lcd.print(DHT.humidity);
+                leituraRealizada = true; // Define a variável de estado para indicar que a leitura foi realizada
+                delay(5000); // Exibe a leitura por 5 segundos
+                lcd.clear();
+                lcd.print("Pronto");
+                delay(1000);
+                leituraRealizada = false; // Reseta a leitura para permitir novas leituras
+            }
+        }
+    } else {
+        botaoPressionado = false; // Reseta o estado do botão quando não está pressionado
+    }
+}
+
+void realizaLeituraDHT() {
+    DHT.read11(DHT11_PINO);
+    Serial.print(DHT.temperature);
+    Serial.print(",");
+    Serial.println(DHT.humidity);
+}
